@@ -7,7 +7,8 @@ import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Signup from './Components/Pages/Signup.jsx'
 import Login from './Components/Pages/Login.jsx'
-import Home from './Components/Pages/Home.jsx'
+import Dashboard from './Components/Pages/Dashboard.jsx'
+import { Profile } from './Components/Pages/Profile.jsx'
 
 const allroots = createBrowserRouter([{
   path: '/',
@@ -21,8 +22,12 @@ const allroots = createBrowserRouter([{
   path :'/login',
   element : <Login/>
 },{
-  path :'/homepage',
-  element :<Home/>
+  path :'/dashboard',
+  element :<Dashboard/>,
+  children:[{
+    path:'profile/:username',
+    element:  <Profile/>
+  }]
 
 }
 ])

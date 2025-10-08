@@ -38,14 +38,10 @@ const Signup = () => {
     password: '',
     Cpassword: ''
   });
-
   toast.success("You signed up successfully!");
   loginNavigation();
 };
-
   return (
-
-
     <div className="flex justify-center items-center h-screen w-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md h-screen">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Sign Up</h2>
@@ -120,7 +116,6 @@ const Signup = () => {
       </div>
       <ToastContainer />
     </div>
-            
   );
 };
 export default Signup;

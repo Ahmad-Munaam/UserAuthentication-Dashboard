@@ -4,7 +4,7 @@ import { IoLogoReact } from "react-icons/io5";
 import {NavLink} from "react-router-dom"
 const App = () => {
   return (
-    <div className="w-screen h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center">
+    <div className="w-screen  h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center">
       <div className="flex justify-center items-center">
       <h1 className="text-4xl font-extrabold text-gray-800 mb-8 tracking-wide drop-shadow-md">
         Welcome to the React World 

@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { IoHome } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
 import { MdCancel } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
-const Home = () => {
+import { CgProfile } from "react-icons/cg";
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { ImSearch } from "react-icons/im";
+import ApiData from '../ApiComponent/ApiData';
+const Dashboard = () => {
+    const [searchApi, setSearchApi] = useState('')
+    const username = useLocation()
+    const [userData, setUserData] = useState(null)
     const backNavigation = useNavigate()
     const [module, setmodule] = useState(false)
+    console.log(username.state)
+    const showProfile = () => {
+        setUserData(username.state.username)
+    }
     return (
         <>
             {module ? (
@@ -33,49 +43,54 @@ const Home = () => {
                             <IoHome className="text-white size-7" />
                             <span className="text-lg font-semibold">React World</span>
                         </div>
-
-
                         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
                             <span className="hover:text-blue-400 cursor-pointer transition">Home</span>
                             <span className="hover:text-blue-400 cursor-pointer transition">Contact Us</span>
                             <span className="hover:text-blue-400 cursor-pointer transition">About</span>
-                            <div
-                                className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-md cursor-pointer transition mt-2 sm:mt-0"
-                                onClick={() => setmodule(true)}
-                            >
+                            <div className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-md cursor-pointer transition mt-2 sm:mt-0"
+                                onClick={() => setmodule(true)}>
                                 <TbLogout className="size-5" />
                                 <span>Logout</span>
                             </div>
+                            <span> <NavLink to={`profile/${userData}`}>
+                                <CgProfile style={{ color: 'black' }} className=' size-7' onClick={showProfile} />
+                            </NavLink>
+                            </span>
                         </div>
                     </nav>
-
                     <div className="flex flex-col sm:flex-row flex-1 overflow-hidden">
                         <aside className="w-full sm:w-[22%] bg-slate-700 p-5 overflow-y-auto">
                             <h2 className="text-2xl font-bold mb-4 border-b border-gray-500 pb-2">Dashboard</h2>
                             <ul className="flex flex-col gap-3">
-                                <li className="hover:bg-slate-600 px-3 py-2 rounded-md cursor-pointer">Games</li>
-                                <li className="hover:bg-slate-600 px-3 py-2 rounded-md cursor-pointer">Esports</li>
-                                <li className="hover:bg-slate-600 px-3 py-2 rounded-md cursor-pointer">SEGA</li>
-                                <li className="hover:bg-slate-600 px-3 py-2 rounded-md cursor-pointer">FIFA</li>
-                                <li className="hover:bg-slate-600 px-3 py-2 rounded-md cursor-pointer">Action</li>
-                                <li className="hover:bg-slate-600 px-3 py-2 rounded-md cursor-pointer">Adventure</li>
+                                {["Game", "ESPORTS", "FIFA", "FREEFIRE", "PUBG"]?.map((value, index) => {
+                                    return (
+                                        <li key={index} className='hover:bg-slate-600 px-3 py-2 rounded-md cursor-pointer'>{value}</li>
+                                    )
+                                })
+                                }
                             </ul>
                         </aside>
                         <main className="flex-1 bg-slate-800 p-6 overflow-y-auto">
                             <h1 className="text-3xl font-bold mb-4">Rest Area</h1>
+                            <Outlet />
+                            {userData !== '' && <p>{userData}</p>}
                             <p className="text-gray-300 leading-relaxed">
                                 Welcome to the main dashboard area. Here you can manage your games,
                                 view stats, and explore esports content.
                             </p>
+                            <div className='w-full flex justify-center gap-2 p-2 items-center'>
+                                <label hidden >Search</label>
+                                <input type="text" name='searchbar' placeholder='Search Anything' value={searchApi} onChange={(e) => {
+                                    e.preventDefault()
+                                    setSearchApi(e.target.value.toLowerCase())
+                                }} className=' focus:border-blue-700 w-full sm:w-1/2 p-2 m-1 text-slate-700 font-serif rounded-md' />
+                                <ImSearch className=' size-6' />
+                            </div>
+                            {/* {userData !== '' && <p>{userData}</p>} */}
+                            <div>
+                                <ApiData searchApi={searchApi} />
+                            </div>
                         </main>
-                    </div>
-                    <div className="flex justify-center py-3 bg-slate-900 border-t border-slate-700">
-                        <button
-                            onClick={() => backNavigation(-1)}
-                            className="bg-gray-700 hover:bg-slate-600 px-6 py-2 rounded-md transition"
-                        >
-                            Back
-                        </button>
                     </div>
                 </div>
             )}
@@ -83,5 +98,5 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Dashboard
 

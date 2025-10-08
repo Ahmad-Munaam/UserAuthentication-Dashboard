@@ -2,17 +2,16 @@ import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import { useSelector } from 'react-redux'
-
 const Login = () => {
   const signupdata = useSelector(state => state.formReducer.FormData)
   const homeNavigation = useNavigate()
-  const homeNavFunction = () => {
-    homeNavigation('/homepage')
-  }
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
   })
+  const homeNavFunction = () => {
+    homeNavigation('/dashboard', {state : {username: loginData.email}})
+  }
   const submitLoginForm = (e) => {
     e.preventDefault()
     const loggedData = signupdata.find(
@@ -34,7 +33,6 @@ const Login = () => {
           <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center tracking-wide">
             Welcome Back
           </h1>
-
           <form className="flex flex-col gap-5" onSubmit={submitLoginForm}>
             <div>
               <label
@@ -88,8 +86,7 @@ const Login = () => {
             Don't have an account?
             <NavLink
               to={"/signup"}
-              className="text-blue-600 hover:text-blue-700 font-semibold"
-            >
+              className="text-blue-600 hover:text-blue-700 font-semibold">
               {" "}Sign up
             </NavLink>
           </p>
