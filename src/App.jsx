@@ -1,5 +1,4 @@
-import Signup from "./Components/Pages/Signup";
-import { BiWorld } from "react-icons/bi";
+
 import { IoLogoReact } from "react-icons/io5";
 import {NavLink} from "react-router-dom"
 const App = () => {

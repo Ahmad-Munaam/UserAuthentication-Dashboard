@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { addformData } from '../../DataStore/formSlice';
 import { useNavigate } from 'react-router-dom';
 const Signup = () => {
-  const navigate=useNavigate()
-  const loginNavigation=()=>{
+  const navigate = useNavigate()
+  const loginNavigation = () => {
     navigate('/login')
   }
-  const [data, setData]=useState([])
+  const [data, setData] = useState([])
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     uname: '',
@@ -19,31 +19,32 @@ const Signup = () => {
   const selecterData = useSelector(state => state.formReducer.FormData)
   console.log(selecterData)
   const handleFormSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (formData.password !== formData.Cpassword) {
-    toast.warning("Passwords do not match!");
-    return; 
-  }
-  const emailExists = selecterData.some(user => user.email === formData.email);
-  if (emailExists) {
-    toast.error("Email already registered!");
-    return; 
-  }
-  setData([...data, formData]);
-  dispatch(addformData(formData));
-  setFormData({
-    uname: '',
-    email: '',
-    password: '',
-    Cpassword: ''
-  });
-  toast.success("You signed up successfully!");
-  loginNavigation();
-};
+    if (formData.password !== formData.Cpassword) {
+      toast.warning("Passwords do not match!");
+      return;
+    }
+    const emailExists = selecterData.some(user => user.email === formData.email);
+    if (emailExists) {
+      toast.error("Email already registered!");
+      return;
+    }
+    setData([...data, formData]);
+    dispatch(addformData(formData));
+    setFormData({
+      uname: '',
+      email: '',
+      password: '',
+      Cpassword: ''
+    });
+    toast.success("You signed up successfully!");
+    loginNavigation();
+  };
   return (
-    <div className="flex justify-center items-center h-screen w-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md h-screen">
+    <div className="flex justify-center items-center min-h-screen w-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md my-10">
+
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Sign Up</h2>
         <form onSubmit={handleFormSubmit}>
           <label htmlFor="name" className="block text-gray-700 font-semibold mb-1">
@@ -113,6 +114,15 @@ const Signup = () => {
             Sign Up
           </button>
         </form>
+       
+
+        <button
+          type="submit"
+          className="w-full  bg-red-500 mt-2 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors"
+          onClick={() => { loginNavigation() }} >
+          Go to Login
+        </button>
+          
       </div>
       <ToastContainer />
     </div>

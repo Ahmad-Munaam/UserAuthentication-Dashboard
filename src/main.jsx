@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+// import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -9,6 +9,7 @@ import Signup from './Components/Pages/Signup.jsx'
 import Login from './Components/Pages/Login.jsx'
 import Dashboard from './Components/Pages/Dashboard.jsx'
 import { Profile } from './Components/Pages/Profile.jsx'
+import DynamicPageInfo from './Components/Pages/DynamicPageInfo.jsx'
 
 const allroots = createBrowserRouter([{
   path: '/',
@@ -24,10 +25,20 @@ const allroots = createBrowserRouter([{
 },{
   path :'/dashboard',
   element :<Dashboard/>,
-  children:[{
-    path:'profile/:username',
-    element:  <Profile/>
-  }]
+  // children:[{
+  //   // path:'profile/:username',
+  //   // element:  <Profile/>
+  //   path : ':id',
+  //   element : <DynamicPageInfo/>
+  // }]
+},
+{
+  path :'/dashboard/:id',
+  element:<DynamicPageInfo/>
+},
+{
+  path :'/dashboard/profile',
+  element : <Profile/>
 
 }
 ])

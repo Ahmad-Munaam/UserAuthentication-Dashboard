@@ -4,13 +4,14 @@ import { toast, ToastContainer } from 'react-toastify'
 import { useSelector } from 'react-redux'
 const Login = () => {
   const signupdata = useSelector(state => state.formReducer.FormData)
+  console.log(signupdata)
   const homeNavigation = useNavigate()
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
   })
   const homeNavFunction = () => {
-    homeNavigation('/dashboard', {state : {username: loginData.email}})
+    homeNavigation('/dashboard', {state : {username: loginData.email, password: loginData.password}})
   }
   const submitLoginForm = (e) => {
     e.preventDefault()
@@ -25,7 +26,6 @@ const Login = () => {
       console.log(false)
     }
   }
-
   return (
     <>
       <div className="flex flex-col justify-between items-center h-screen w-screen bg-gradient-to-br from-gray-100 to-gray-200">
@@ -73,7 +73,6 @@ const Login = () => {
                 className="w-full px-4 py-2 rounded-lg bg-gray-50 text-gray-800 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-
             <button
               type="submit"
               className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg shadow-md transition duration-200"
@@ -91,16 +90,7 @@ const Login = () => {
             </NavLink>
           </p>
         </div>
-
         <ToastContainer />
-        <button
-          onClick={() => {
-            homeNavigation('/signup')
-          }}
-          className="p-2 bg-blue-100 text-blue-800 font-medium rounded-md mb-6 hover:bg-blue-200 transition"
-        >
-          Go to Signup Page
-        </button>
       </div>
     </>
   )
