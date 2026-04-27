@@ -5,6 +5,7 @@ export const formSlice = createSlice({
         FormData: JSON.parse(localStorage.getItem("storedData")) || [],
         apiUiData: []
     },
+    // the reducers area added for rebase and merge conflict
     reducers: {
         addformData: (state, action) => {
             state.FormData.push(action.payload)
