@@ -10,7 +10,7 @@ import Login from './Components/Pages/Login.jsx'
 import Dashboard from './Components/Pages/Dashboard.jsx'
 import { Profile } from './Components/Pages/Profile.jsx'
 import DynamicPageInfo from './Components/Pages/DynamicPageInfo.jsx'
-
+// add more cod for feature branch
 const allroots = createBrowserRouter([{
   path: '/',
   element: <App />
